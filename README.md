@@ -3,6 +3,8 @@
 ![build](https://github.com/LOOKS999/Lida/actions/workflows/build.yml/badge.svg)
 ![release](https://img.shields.io/github/v/release/LOOKS999/Lida)
 
+**Website:** https://looks999.github.io/Lida
+
 A tiny Windows tray app that follows your system light/dark theme and swaps your
 **wallpaper** and **cursor scheme** automatically.
 
