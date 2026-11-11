@@ -1,0 +1,21 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        shell: cmd
+        run: build.bat
+      - name: Upload Lida.exe
+        uses: actions/upload-artifact@v4
+        with:
+          name: Lida
+          path: Lida.exe
+          if-no-files-found: error

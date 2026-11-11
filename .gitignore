@@ -1,0 +1,20 @@
+# Build output
+build/
+*.obj
+*.res
+*.pdb
+*.ilk
+*.exp
+*.exe
+
+# Visual Studio / CMake
+.vs/
+out/
+CMakeUserPresets.json
+
+# Local runtime settings (never commit personal paths)
+config.json
+
+# OS junk
+Thumbs.db
+desktop.ini
