@@ -28,8 +28,8 @@
 :root{
   --bg:#F8F7F4;--surface:#FFFFFF;--ink:#1E2321;--muted:#6B746F;--accent:#7F9C90;--accent-ink:#17211D;
   --border:#E3E1DB;--hover:#F1EFE9;--shadow:0 1px 2px rgba(20,24,22,.04),0 8px 24px rgba(20,24,22,.06);
-  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
-  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --serif:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","Segoe UI",system-ui,sans-serif;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue","Segoe UI",system-ui,sans-serif;
   --mono:ui-monospace,"Cascadia Code","Consolas",monospace;
   --r:16px;--r-sm:12px;--r-pill:999px;
   --max:1120px;--gap:24px;
@@ -51,7 +51,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .section{padding:96px 0}
 .section-tight{padding:64px 0}
 .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
-h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;margin:0}
+h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;margin:0}
 h1{font-size:clamp(2.4rem,5vw,4.2rem);line-height:1.05}
 h2{font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:1.1}
 h3{font-size:1.25rem;line-height:1.25}
@@ -65,8 +65,8 @@ p:last-child{margin-bottom:0}
 header.site{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid transparent;transition:border-color .2s ease,background .2s ease}
 header.site.scrolled{border-bottom-color:var(--border)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1.05rem}
-.brand svg{width:22px;height:22px;color:var(--accent)}
+.brand-icon{width:22px;height:22px;border-radius:5px;flex-shrink:0}
+.brand-mark{width:22px;height:22px;color:var(--accent);flex-shrink:0}
 .nav-links{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}
 .nav-links a{padding:8px 12px;border-radius:8px;font-size:.92rem;color:var(--muted);transition:color .15s ease,background .15s ease}
 .nav-links a:hover,.nav-links a.active{color:var(--ink);background:var(--hover)}
@@ -240,7 +240,8 @@ footer{padding:48px 0;border-top:1px solid var(--border);color:var(--muted);font
 <header class="site" id="siteHeader">
   <div class="container nav">
     <a class="brand" href="#top" aria-label="Lida home">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="12" height="12" rx="3" stroke="currentColor" stroke-width="1.6"/><rect x="9" y="7" width="12" height="12" rx="3" fill="currentColor" opacity=".85"/></svg>
+      <img src="icon.ico" alt="" width="22" height="22" class="brand-icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <svg class="brand-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display:none"><rect x="3" y="5" width="12" height="12" rx="3" stroke="currentColor" stroke-width="1.6"/><rect x="9" y="7" width="12" height="12" rx="3" fill="currentColor" opacity=".85"/></svg>
       <span>Lida</span>
     </a>
     <ul class="nav-links" id="navLinks">
@@ -460,7 +461,10 @@ footer{padding:48px 0;border-top:1px solid var(--border);color:var(--muted);font
       </ul>
     </div>
     <div class="version-card">
-      <div class="version-row"><span>Version</span><strong>v1.0.0</strong></div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
+        <img src="icon.ico" alt="" width="40" height="40" style="border-radius:9px" onerror="this.style.display='none'">
+        <div><strong style="font-size:1.05rem">Lida</strong><div class="small muted">Windows 10 &amp; 11</div></div>
+      </div>
       <div class="version-row"><span>Size</span><strong>466 KB</strong></div>
       <div class="version-row"><span>Requires</span><strong>Windows 10 / 11 (x64)</strong></div>
       <div class="version-row"><span>License</span><strong>MIT</strong></div>
@@ -542,10 +546,10 @@ footer{padding:48px 0;border-top:1px solid var(--border);color:var(--muted);font
   if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
     var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{threshold:.12});
     document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+    setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});},2500);
   }else{
     document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
   }
-
   // demo mode
   var demoStage=document.getElementById('demoStage');
   document.querySelectorAll('[data-mode-btn]').forEach(function(b){
