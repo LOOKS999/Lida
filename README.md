@@ -245,7 +245,9 @@ CMake is also supported (`CMakeLists.txt`). The icon is embedded from `icon.ico`
 resource ID **101** (`resource.rc`); keep that ID if you change the icon.
 
 The GitHub Actions workflow in `.github/workflows/build.yml` builds the project on every
-push and uploads `Lida.exe` as an artifact.
+push to `main` and on pull requests, and uploads `Lida.exe` as an artifact. Pushing a
+tag like `v1.0.1` runs `.github/workflows/release.yml`, which builds and attaches
+`Lida.exe` to a GitHub Release automatically.
 
 ---
 
@@ -307,6 +309,8 @@ Exit Lida, then delete `%APPDATA%\Lida\config.json`. The next launch writes defa
 | `build.bat` | One-step build script |
 | `CMakeLists.txt` | Optional CMake build |
 | `.github/workflows/build.yml` | CI build + artifact upload |
+| `.github/workflows/release.yml` | Tag-triggered release with `Lida.exe` attached |
+| `.gitattributes` | Consistent line endings |
 | `LICENSE` | MIT license |
 
 Runtime files (not in the repo): `%APPDATA%\Lida\config.json`.
